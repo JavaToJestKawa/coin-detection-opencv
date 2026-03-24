@@ -47,18 +47,20 @@ def count_coins(image_data):
             else:
                 money_outside_tray.append(classify_coin_by_radius(r, max_radius))
 
+    money_on_tray_float = [money/100 for money in money_on_tray]
+    money_outside_tray_float = [money/100 for money in money_outside_tray]
     print("\n" * 5)
-    print(f"pieniadze na tacy [{len(money_on_tray)}]:   {money_on_tray}   =   {sum(money_on_tray):.2f} PLN")
-    print(f"pieniadze poza taca [{len(money_outside_tray)}]: {money_outside_tray}   =   {sum(money_outside_tray):.2f} PLN")
+    print(f"pieniadze na tacy [{len(money_on_tray)}]:   {money_on_tray_float}   =   {sum(money_on_tray)/100:.2f} PLN")
+    print(f"pieniadze poza taca [{len(money_outside_tray)}]: {money_outside_tray_float}   =   {sum(money_outside_tray)/100:.2f} PLN")
 
     y_offset = int(color_img.shape[0] * TXT_Y_OFFSET_FACTOR)
     x_offset = int(color_img.shape[1] * TXT_X_OFFSET_FACTOR)
 
-    draw_text_on_image(color_img, f"na tacy [{len(money_on_tray)}]: {money_on_tray}")
-    draw_text_on_image(color_img, f"poza taca [{len(money_outside_tray)}]: {money_outside_tray}", (0, y_offset))
+    draw_text_on_image(color_img, f"na tacy [{len(money_on_tray)}]: {money_on_tray_float}")
+    draw_text_on_image(color_img, f"poza taca [{len(money_outside_tray)}]: {money_outside_tray_float}", (0, y_offset))
 
-    draw_text_on_image(color_img, f"= {sum(money_on_tray):.2f} PLN", (x_offset, 0))
-    draw_text_on_image(color_img, f"= {sum(money_outside_tray):.2f} PLN", (x_offset, y_offset))
+    draw_text_on_image(color_img, f"= {sum(money_on_tray)/100:.2f} PLN", (x_offset, 0))
+    draw_text_on_image(color_img, f"= {sum(money_outside_tray)/100:.2f} PLN", (x_offset, y_offset))
 
     cv2.imshow("img", color_img)
     cv2.waitKey()
@@ -93,8 +95,8 @@ def classify_coin_by_radius(radius, max_radius):
     threshold = max_radius * 90 / 100
 
     if radius >= threshold:
-        return 5.00
-    return 0.05
+        return int(500)
+    return int(5)
 
 
 # Wykrywanie tacy
