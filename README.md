@@ -15,6 +15,5 @@ Coin detection and counting implementation using Python and OpenCV.
 * NumPy
 
 ## How to run
-
 pip install opencv-python numpy
 python main.py
