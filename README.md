@@ -2,6 +2,11 @@
 
 Coin detection and counting implementation using Python and OpenCV.
 
+## Demo
+
+![Application demo](sample_results/tray1_result.png)
+![Application demo](sample_results/tray7_result.png)
+
 ## Features
 
 * Coin detection using Hough circles
